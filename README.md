@@ -16,6 +16,15 @@ The backend is hosted on firebase and firestore. Authentication is also done usi
 Babble is hosted [here](https://babble-chat.ml/).
 Create a new account or sign in to your existing account. Have fun Babbling!
 
+## Working Video
+
+The working of the application is given below:
+
+<a href="https://www.loom.com/share/4791de60e99d4630bac7f55d298b8900">
+    <p>https://babble-chat.ml/login - 8 November 2022 - Watch Video</p>
+    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/4791de60e99d4630bac7f55d298b8900-with-play.gif">
+  </a>
+
 ## Getting Started
 
 Clone the repository:
