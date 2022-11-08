@@ -21,11 +21,11 @@ function Message({
       {isMine ? null : (
         <img
           className="object-cover h-12 w-12 rounded-full my-auto mx-0"
-          src="https://i.imgflip.com/2ft03l.jpg"
+          src="/images/avatar.jpg"
         />
       )}
       <div
-        className={`min-h-5 p-3 break-words max-w-xl min-w-[5%] m-4 align-middle rounded-xl ${messageColor} ${
+        className={`min-h-5 p-3 break-words shadow-md max-w-xl min-w-[5%] m-4 align-middle rounded-xl ${messageColor} ${
           isMine ? "ml-auto" : "mr-auto"
         }`}
       >

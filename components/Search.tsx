@@ -97,7 +97,6 @@ const Search = () => {
             user={selectedUser}
             uid={selectedUser.uid}
             userName={selectedUser.name}
-            userProfile="https://i.imgflip.com/2ft03l.jpg"
             lastMessage=""
           />
         </div>

@@ -47,9 +47,7 @@ function Input() {
         handleInput();
       }}
     >
-      <section className="h-16 p-4 w-full right-0 input-field flex flex-row align-middle bottom-0 bg-green-100 sticky px-3">
-        <BsEmojiHeartEyesFill size={23} className="my-auto mx-2" />
-
+      <section className="h-16 p-4 w-full right-0 input-field flex flex-row align-middle bottom-0 bg-green-200 sticky px-3 shadow-lg">
         <input
           type="text"
           value={text}
