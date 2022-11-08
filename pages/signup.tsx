@@ -51,8 +51,8 @@ function SignUp() {
             <h1 className="mb-8 text-3xl text-center">Sign up</h1>
             {err ? (
               <section className="bg-red-500 text-white w-full my-2 p-3 text-center">
-                Something' not right! Please check the values that you've
-                entered!
+                Something&apos; not right! Please check the values that
+                you&apos;ve entered!
               </section>
             ) : null}
             <form onSubmit={handleSignup}>

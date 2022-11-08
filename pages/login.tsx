@@ -36,7 +36,7 @@ function Login() {
             <h1 className="mb-8 text-3xl text-center">Log In</h1>
             {error ? (
               <section className="bg-red-500 text-white w-full my-2 p-3 text-center">
-                Something's not right! Please check if you entered a valid email
+                Something&apos;s not right! Please check if you entered a valid email
                 and password.
               </section>
             ) : null}
