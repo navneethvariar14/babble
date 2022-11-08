@@ -4,12 +4,13 @@ import "../config/firebase";
 import { AuthContextProvider } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import { ChatContextProvider } from "../context/ChatContext";
+import { Head } from "next/document";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>
       <ChatContextProvider>
-        <Layout title={Component.title}>
+        <Layout>
           <Component {...pageProps} />
         </Layout>
       </ChatContextProvider>

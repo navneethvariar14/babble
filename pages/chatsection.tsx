@@ -11,7 +11,7 @@ function ChatSection() {
   const { user } = useAuth();
   const { data } = useContext(ChatContext);
   return (
-    <div>
+    <>
       {user ? (
         <div className="flex flex-row">
           <ChatSideBar />
@@ -20,7 +20,7 @@ function ChatSection() {
       ) : (
         <Login />
       )}
-    </div>
+    </>
   );
 }
 

@@ -23,14 +23,21 @@ export const ChatContextProvider = ({
 
   const chatReducer = (state: Object, action: any) => {
     const { user } = useAuth();
+    console.log("cs", user, action);
     switch (action.type) {
       case "USER_CHANGE": {
         return {
           chatID:
             user.uid > action.payload.uid
               ? user.uid + action.payload.uid
-              : action.payload.uid + user.id,
+              : action.payload.uid + user.uid,
           user: action.payload,
+        };
+      }
+      case "USER_REMOVE": {
+        return {
+          chatID: null,
+          user: {},
         };
       }
       default: {

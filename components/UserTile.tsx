@@ -18,6 +18,7 @@ const UserTile = ({
 }) => {
   const { dispatch } = useContext(ChatContext);
   const handleSelect = () => {
+    console.log("user", user);
     dispatch({ type: "USER_CHANGE", payload: user });
   };
   return (
@@ -31,7 +32,7 @@ const UserTile = ({
       />
       <section className="flex flex-col">
         <h3 className="font-bold">{userName}</h3>
-        <p>{lastMessage}</p>
+        <em>{lastMessage}</em>
       </section>
       <hr />
     </div>

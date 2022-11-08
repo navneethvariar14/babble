@@ -3,11 +3,12 @@ import React, { useContext } from "react";
 import { ChatContext } from "../context/ChatContext";
 import { useAuth } from "../context/AuthContext";
 import { Timestamp } from "firebase/firestore";
+import { isContext } from "vm";
 
 function Message({
   content,
 }: {
-  content: { text: string; senderId: string; time: Timestamp };
+  content: { text: string; senderId: string; date: Timestamp };
 }) {
   const { user } = useAuth();
   const { data } = useContext(ChatContext);
@@ -29,7 +30,12 @@ function Message({
         }`}
       >
         <p>{content.text}</p>
-        <em className="text-xs">{JSON.stringify(content.time)}</em>
+        <em className="text-xs">
+          {new Date(content.date.toDate()).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </em>
       </div>
     </div>
   );

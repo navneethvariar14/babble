@@ -1,18 +1,19 @@
 import { setUserId } from "firebase/analytics";
 import { signOut } from "firebase/auth";
 import { Router, useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { auth, db } from "../config/firebase";
 import { useAuth } from "../context/AuthContext";
 import Search from "../components/Search";
 import UserTile from "./UserTile";
 import { doc, onSnapshot } from "firebase/firestore";
+import { ChatContext } from "../context/ChatContext";
 
 export default function ChatSidebar() {
   const [chats, setChats] = useState([]);
   const router = useRouter();
   const { user, setUser } = useAuth();
-
+  const { dispatch } = useContext(ChatContext);
   useEffect(() => {
     onSnapshot(doc(db, "userChats", user.uid), (doc) => {
       setChats(doc.data() as any);
@@ -37,6 +38,7 @@ export default function ChatSidebar() {
                 onClick={() => {
                   signOut(auth);
                   setUser(null);
+                  dispatch({ type: "USER_REMOVE", payload: null });
                   router.push("/login");
                 }}
               >
@@ -47,7 +49,6 @@ export default function ChatSidebar() {
           <Search />
           <div className="flex-1 flex-col">
             {Object.entries(chats).map((chat, key) => {
-              console.log("from sidebar: ", chat);
               return (
                 <UserTile
                   key={key}

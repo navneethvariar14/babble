@@ -5,7 +5,6 @@ import router, { useRouter } from "next/router";
 import React, { useState } from "react";
 import { auth } from "../config/firebase";
 import { useAuth } from "../context/AuthContext";
-Login.title = "Login to Babble";
 function Login() {
   const route = useRouter();
   const { setUser } = useAuth();
@@ -24,7 +23,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <>
       <div className="bg-gray-200 min-h-screen flex flex-col">
         <div className="container rounded-lg max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
@@ -85,7 +84,7 @@ function Login() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
