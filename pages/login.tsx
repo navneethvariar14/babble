@@ -5,10 +5,10 @@ import router, { useRouter } from "next/router";
 import React, { useState } from "react";
 import { auth } from "../config/firebase";
 import { useAuth } from "../context/AuthContext";
-
+Login.title = "Login to Babble";
 function Login() {
   const route = useRouter();
-  const { user, signin } = useAuth();
+  const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -25,15 +25,15 @@ function Login() {
 
   return (
     <div>
-      <Head>
-        <title>Login to Babble</title>
-      </Head>
       <div className="bg-gray-200 min-h-screen flex flex-col">
         <div className="container rounded-lg max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h2 className="text-center text-[35px] mb-8">
-              <b className="">Babble</b>
-            </h2>
+            <div className="flex flex-row justify-center">
+              <img className="w-12 h-12" src="/images/bitmap.png"></img>
+              <h2 className="text-center text-5xl mx-2 my-auto text-[35px] mb-8">
+                <b className="">Babble</b>
+              </h2>
+            </div>
             <h1 className="mb-8 text-3xl text-center">Log In</h1>
             {error ? (
               <section className="bg-red-500 text-white w-full my-2 p-3 text-center">

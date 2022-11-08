@@ -8,7 +8,6 @@ import ChatSection from "./chatsection";
 import { useRouter } from "next/router";
 
 export default function Home() {
-  console.log("hei");
   const router = useRouter();
   const { user } = useAuth();
   if (user) {

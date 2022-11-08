@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { auth, db } from "../config/firebase";
@@ -6,10 +6,10 @@ import { doc, setDoc } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import { stringify } from "querystring";
 import { Head } from "next/document";
-
+SignUp.title = "SignUp to Babble";
 function SignUp() {
   const router = useRouter();
-  const { user } = useAuth();
+  const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -17,35 +17,37 @@ function SignUp() {
   const handleSignup = async (e: any) => {
     e.preventDefault();
     try {
-      const userData = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
+      await createUserWithEmailAndPassword(auth, email, password).then(
+        (res) => {
+          updateProfile(res.user, { displayName: name });
+        }
       );
-      await setDoc(doc(db, "users", userData.user.uid), {
-        name,
-        email: userData.user.email,
-        uid: userData.user.uid,
-      }).then(() => {
-        console.log("User added to db");
-        router.push("/");
-      });
-      await setDoc(doc(db, "userChats", userData.user.uid), {});
+      const userData = await auth.currentUser;
+      if (userData) {
+        setUser(userData);
+        await setDoc(doc(db, "users", userData.uid), {
+          name: name,
+          email: userData.email,
+          uid: userData.uid,
+        });
+        await setDoc(doc(db, "userChats", userData.uid), {});
+      }
+      router.push("/");
     } catch (err) {
       setErr(true);
     }
   };
   return (
     <div>
-      <Head>
-        <title>Sign Up to Babble</title>
-      </Head>
       <div className="bg-gray-200 min-h-screen flex flex-col">
         <div className="container rounded-lg max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h2 className="text-center text-[35px] mb-8">
-              <b className="">Babble</b>
-            </h2>
+            <div className="flex flex-row justify-center">
+              <img className="w-12 h-12" src="/images/bitmap.png"></img>
+              <h2 className="text-center text-5xl mx-2 my-auto text-[35px] mb-8">
+                <b className="">Babble</b>
+              </h2>
+            </div>
             <h1 className="mb-8 text-3xl text-center">Sign up</h1>
             {err ? (
               <section className="bg-red-500 text-white w-full my-2 p-3 text-center">
@@ -102,7 +104,7 @@ function SignUp() {
           <div className="text-grey-dark mt-6">
             Already have an account?
             <button
-              className="no-underline border-b border-blue text-blue"
+              className="ml-2 border-b border-blue text-blue"
               onClick={() => {
                 router.push("/login");
               }}

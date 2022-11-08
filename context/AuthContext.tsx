@@ -7,9 +7,9 @@ import {
 } from "firebase/auth";
 import { auth } from "../config/firebase";
 
-const AuthContext = createContext<any>({});
-export const useAuth = () => useContext(AuthContext);
+const AuthContext = createContext<any>(null);
 
+export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({
   children,
 }: {
@@ -29,10 +29,10 @@ export const AuthContextProvider = ({
       } else {
         setUser(null);
       }
+      setLoading(false);
       return () => {
         unsub();
       };
-      setLoading(false);
     });
   }, []);
   const signUp = async (email: string, password: string) => {
