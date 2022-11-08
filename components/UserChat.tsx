@@ -31,11 +31,13 @@ const UserChat = () => {
       <ChatTopBar />
       <section
         ref={chatWindow}
-        className="px-3 message-section grow flex flex-col overflow-auto"
+        className="px-3 message-section grow flex flex-col-reverse overflow-auto"
       >
         {messages &&
           messages
-            .reverse()
+            .sort((x, y) => {
+              return y["date"] - x["date"];
+            })
             .map(
               (message: {
                 id: string;
