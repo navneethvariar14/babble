@@ -34,17 +34,18 @@ const UserChat = () => {
         className="px-3 message-section grow flex flex-col overflow-auto"
       >
         {messages &&
-          messages.reverse() &&
-          messages.map(
-            (message: {
-              id: string;
-              text: string;
-              senderId: string;
-              date: Timestamp;
-            }) => {
-              return <Message content={message} key={message.id} />;
-            }
-          )}
+          messages
+            .reverse()
+            .map(
+              (message: {
+                id: string;
+                text: string;
+                senderId: string;
+                date: Timestamp;
+              }) => {
+                return <Message content={message} key={message.id} />;
+              }
+            )}
       </section>
       {data.chatID ? <Input /> : null}
     </div>
